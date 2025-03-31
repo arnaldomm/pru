@@ -1,0 +1,8 @@
+.a {
+  color: $blue;
+  font-size: rem(32px);
+
+  @at-root .kk & {
+    color: green;
+  }
+}
