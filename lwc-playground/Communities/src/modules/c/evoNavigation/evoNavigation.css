@@ -1,0 +1,410 @@
+/* Root component */
+.evo-nav {
+  background-color: var(--evo-white, #fff);
+  position: relative;
+  padding: 15px 0;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav {
+    padding: 0;
+    margin-left: -6px;
+    margin-right: -6px;
+  }
+}
+
+/* Informational element that will not animate (only mobile) */
+.evo-nav__info {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav__info {
+    display: none;
+  }
+}
+
+/* Name of the curent page (only mobile) */
+.evo-nav__currentpage {
+  font-size: 17px;
+  line-height: 1;
+  font-weight: bold;
+  outline-offset: 4px;
+}
+
+/* Navigation element that will animate */
+.evo-nav__menu {
+  background-color: var(--evo-white, #fff);
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav__menu {
+    position: static;
+    padding: 0;
+    flex-direction: row;
+  }
+}
+
+.evo-nav__menu_slidein,
+.evo-nav__menu_slideout {
+  padding: 25px 18px 15px;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation-fill-mode: forwards;
+  animation-duration: .25s;
+  animation-timing-function: ease-in-out;
+  position: fixed;
+}
+
+.evo-nav__menu_slidein {
+  animation-name: slidein;
+}
+
+.evo-nav__menu_slideout {
+  animation-name: slideout;
+  animation-delay: 0.1s;
+}
+
+@media screen and (min-width: 64rem) {
+
+  .evo-nav__menu_slidein,
+  .evo-nav__menu_slideout {
+    position: static;
+    animation-name: none;
+    padding: 0;
+  }
+}
+
+/* Slidein animation */
+@keyframes slidein {
+  0% {
+    transform: translate3d(100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Slideout animation */
+@keyframes slideout {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(100%, 0, 0);
+  }
+}
+
+/* Hamburger menu button (only mobile) */
+.evo-nav__hamburger {
+  border: 0;
+  outline-offset: 4px;
+  width: 27px;
+  height: 19px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 0 0 auto;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  background-color: var(--evo-white, #fff);
+  flex-shrink: 0;
+}
+
+.evo-nav__hamburger::-moz-focus-inner {
+  border: 0;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav__hamburger {
+    display: none;
+  }
+}
+
+.evo-nav__menu_slidein .evo-nav__hamburger,
+.evo-nav__menu_slideout .evo-nav__hamburger {
+  justify-content: center;
+  align-items: center;
+}
+
+/* Bars inside the button - Hamburger symbol (only mobile) */
+.evo-nav__bars {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--evo-link-blue, #06c);
+}
+
+/* Bars inside the button - X symbol (only mobile) */
+.evo-nav__menu_slidein .evo-nav__bars:nth-child(1),
+.evo-nav__menu_slideout .evo-nav__bars:nth-child(1) {
+  width: 23px;
+  transform: translateY(50%) rotate(45deg);
+}
+
+.evo-nav__menu_slidein .evo-nav__bars:nth-child(2),
+.evo-nav__menu_slideout .evo-nav__bars:nth-child(2) {
+  display: none;
+}
+
+.evo-nav__menu_slidein .evo-nav__bars:nth-child(3),
+.evo-nav__menu_slideout .evo-nav__bars:nth-child(3) {
+  width: 23px;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+/* Heading (only mobile) */
+.evo-nav__heading {
+  display: none;
+}
+
+.evo-nav__menu_slidein .evo-nav__heading,
+.evo-nav__menu_slideout .evo-nav__heading {
+  display: block;
+  position: relative;
+  margin: 25px 0 10px;
+  padding-top: 27px;
+  flex-shrink: 0;
+}
+
+.evo-nav__menu_slidein .evo-nav__heading::before,
+.evo-nav__menu_slideout .evo-nav__heading::before {
+  content: '';
+  display: block;
+  width: 100vw;
+  height: 7px;
+  position: absolute;
+  top: 0;
+  left: -18px;
+  background-image: linear-gradient(to right, #ddf1ed, #bcd9f2);
+}
+
+@media screen and (min-width: 64rem) {
+
+  .evo-nav__menu_slidein .evo-nav__heading,
+  .evo-nav__menu_slideout .evo-nav__heading,
+  .evo-nav__heading {
+    display: none;
+  }
+}
+
+/* List */
+.evo-nav__list {
+  display: none;
+  list-style: none;
+  padding: 0;
+  overflow: scroll;
+}
+
+.evo-nav__menu_slidein .evo-nav__list,
+.evo-nav__menu_slideout .evo-nav__list {
+  display: block;
+}
+
+@media screen and (min-width: 64rem) {
+
+  .evo-nav__menu_slidein .evo-nav__list,
+  .evo-nav__menu_slideout .evo-nav__list,
+  .evo-nav__list {
+    display: flex;
+  }
+
+  .evo-nav__list {
+    overflow: visible;
+    width: 100%;
+    /* justify-content: space-between; */
+  }
+}
+
+.evo-nav__sublist {
+  list-style: none;
+  padding: 0 0 0 20px;
+  overflow: hidden;
+  animation-fill-mode: forwards;
+  animation-duration: .25s;
+  animation-timing-function: ease-in-out;
+  display: none;
+}
+
+.evo-nav__menutitem_expandable[aria-expanded="true"]+.evo-nav__sublist {
+  display: block;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav__sublist {
+    padding-left: 0;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 100%;
+    background-color: var(--evo-white, #fff);
+    border-left: 1px solid #deddde;
+    border-right: 1px solid #deddde;
+    border-bottom: 1px solid #deddde;
+  }
+}
+
+/* List Items */
+.evo-nav__listitem {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav__listitem {
+    margin: 0 10px;
+    position: relative;
+  }
+
+  .evo-nav__listitem:first-of-type {
+    margin-left: 0;
+  }
+
+  .evo-nav__listitem:last-of-type {
+    margin-right: 0;
+  }
+
+  .evo-nav__listitem_expandable {
+    margin: 0;
+  }
+}
+
+/* Menu Items */
+.evo-nav__menuitem,
+.evo-nav__submenuitem {
+  display: block;
+  margin: 0;
+  padding: 15px 18px;
+  font-size: 17px;
+  line-height: 20px;
+  font-weight: normal;
+  text-decoration: none !important;
+  text-align: left;
+  color: var(--evo-gray-600, #333);
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+}
+
+.evo-nav__menuitem::-moz-focus-inner,
+.evo-nav__submenuitem::-moz-focus-inner {
+  border: 0;
+}
+
+.evo-nav__menuitem:focus-visible,
+.evo-nav__menuitem:hover,
+.evo-nav__submenuitem:focus-visible,
+.evo-nav__submenuitem:hover {
+  color: var(--evo-link-blue, #06c);
+  outline-offset: -3px;
+}
+
+.evo-nav__menuitem:focus-visible .evo-nav__menuitem-text,
+.evo-nav__menuitem:hover .evo-nav__menuitem-text,
+.evo-nav__submenuitem:focus-visible .evo-nav__submenuitem-text,
+.evo-nav__submenuitem:hover .evo-nav__submenuitem-text {
+  text-decoration: underline;
+}
+
+.evo-nav__menuitem-text:not(:last-child),
+.evo-nav__submenuitem-text:not(:last-child) {
+  margin-right: .5em;
+}
+
+.evo-nav__iconcaret {
+  display: inline-block;
+  width: 1em;
+  /* transition: transform 0.15s ease-in-out; */
+}
+
+.evo-nav__menutitem_expandable[aria-expanded="true"] .evo-nav__iconcaret {
+  transform-origin: 50% 55%;
+  transform: rotate(-180deg);
+}
+
+.evo-nav__iconopenwindow {
+  font-size: 20px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px;
+}
+
+@media screen and (min-width: 64rem) {
+
+  .evo-nav__menuitem {
+    margin: 0;
+    padding: 21px 6px;
+    line-height: 23px;
+  }
+
+  .evo-nav__submenuitem {
+    padding: 21px 18px;
+    margin: 0;
+    width: 100%;
+  }
+
+  .evo-nav__listitem:first-of-type .evo-nav__submenuitem {
+    padding-top: 21px;
+  }
+
+  .evo-nav__listitem:last-of-type .evo-nav__submenuitem {
+    padding-bottom: 21px;
+  }
+}
+
+.evo-nav__menuitem:active,
+.evo-nav__submenuitem:active {
+  color: var(--evo-navy, #001f45);
+}
+
+.evo-nav__menuitem_current,
+.evo-nav__submenuitem_current {
+  font-weight: bold;
+  position: relative;
+}
+
+.evo-nav__menuitem_current:hover,
+.evo-nav__menuitem_current:focus,
+.evo-nav__submenuitem_current:hover,
+.evo-nav__submenuitem_current:focus {
+  color: var(--evo-gray-600, #333);
+}
+
+.evo-nav__menuitem_current::after,
+.evo-nav__submenuitem_current::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 7px;
+  width: 2px;
+  height: 20px;
+  background-color: var(--evo-link-blue, #06c);
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-nav__menuitem_current::after {
+    top: auto;
+    left: 3px;
+    bottom: 0;
+    transform: translateY(0);
+    width: calc(100% - 6px);
+    height: 2px;
+  }
+}

@@ -1,0 +1,18 @@
+<template>
+  <lightning-datatable
+    key-field={keyFieldName}
+    columns={columns}
+    data={data}
+    hide-checkbox-column={hideRowSelection}
+    min-column-width="111"
+    default-sort-direction={defaultsortdirection}
+    sorted-by={sortedby}
+    enable-infinite-loading={enableinfiniteloading}
+    wrap-text-max-lines={wraptextmaxlines}
+    onrowaction={handleRowAction}
+    column-widths-mode="auto"
+    onsort={handleSort}
+    onsave={handleSave}
+    draft-values={draftValues}>
+  </lightning-datatable>
+</template>

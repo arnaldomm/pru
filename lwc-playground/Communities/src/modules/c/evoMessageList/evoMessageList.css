@@ -1,0 +1,67 @@
+/* Root component */
+.evo-message-list {
+  background-color: var(--evo-white, #fff);
+}
+
+.evo-message-list__table {
+  border-collapse: collapse;
+  display: block;
+}
+
+thead,
+tbody {
+  display: block;
+}
+
+.evo-message-list__table-row {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+}
+
+.evo-message-list__table-row_unread {
+  font-weight: bold;
+}
+
+.evo-message-list__table-cell {
+  padding: 22px 8px;
+  white-space: nowrap;
+  text-align: left;
+  display: block;
+}
+
+@media screen and (min-width: 64rem) {
+  .evo-message-list__table-cell {
+    padding: 28px 18px;
+  }
+}
+
+.evo-message-list__table-cell_header-date,
+.evo-message-list__table-cell_header-subject {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.evo-message-list__table-cell_header-date,
+.evo-message-list__table-cell_date {
+  width: 107px; /* The width is to avoid cells to exand and show the ellipsis */
+}
+
+.evo-message-list__table-cell_header-subject,
+.evo-message-list__table-cell_subject {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 107px);
+}
+
+/* Tablet */
+@media screen and (min-width: 48rem) {
+  .evo-message-list__table-cell_header-date,
+  .evo-message-list__table-cell_date {
+    width: 127px;
+  }
+  
+  .evo-message-list__table-cell_header-subject,
+  .evo-message-list__table-cell_subject {
+    width: calc(100% - 127px);
+  }
+}

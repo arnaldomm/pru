@@ -1,0 +1,33 @@
+<template>
+  <div class="evo-message-list">
+    <template lwc:if={data}>
+      <template lwc:if={data.messages.length}>
+        <table class="evo-message-list__table" aria-label="List of messages">
+          <thead>
+            <tr class="evo-message-list__table-row">
+              <th class="evo-message-list__table-cell evo-message-list__table-cell_header-date" scope="col">Date</th>
+              <th class="evo-message-list__table-cell evo-message-list__table-cell_header-subject" scope="col">Subject</th>
+            </tr>
+          </thead>
+          <tbody>
+            <template for:each={data.messages} for:item="msg" for:index="index">
+              <tr key={msg.requestId} class={msg.unreadClass}>
+                <td class="evo-message-list__table-cell evo-message-list__table-cell_date">{msg.date}</td>
+                <td class="evo-message-list__table-cell evo-message-list__table-cell_subject">
+                  <!-- IMO, buttons are preferable here since there is no navigation. Anna M Smith recommended links -->
+                  <a href="javascript:void(0)" onclick={handleMsgClick}>{msg.subject}</a>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </template>
+      <template lwc:else>
+        <div class="nds-text-align_center">You have no messages at this time</div>
+      </template>
+    </template>
+    <template lwc:else>
+      <div class="nds-text-align_center">Something went wrong!</div>
+    </template>
+  </div>
+</template>

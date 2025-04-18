@@ -1,0 +1,59 @@
+<template>
+  <nav lwc:if={msgCenterData}
+  class="evo-message-center"
+  aria-label={msgCenterData.label}
+  onkeydown={handleKeydown}
+  onfocusout={handleFocusOut}>
+
+    <button 
+      data-locator="button"
+      class="evo-message-center__button"
+      type="button"
+      aria-label={totalNewNotifString}
+      aria-controls="evoNavList"
+      aria-expanded={_bExpanded}
+      onclick={handleButtonClick}>
+      <svg role="img" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+        <path d="M23.25,20.154V13.615C23.25,9.6,21,6.24,17.063,5.351V4.462a2.065,2.065,0,0,0-4.125,0v.889C8.991,6.24,6.75,9.588,6.75,13.615v6.538L4,22.769v1.308H26V22.769ZM15,28a2.693,2.693,0,0,0,2.75-2.615h-5.5A2.684,2.684,0,0,0,15,28Z"/>
+      </svg>
+      <span lwc:if={_totalNewNotif} class="evo-message-center__new evo-message-center__new_total" aria-hidden="true">{_totalNewNotifStr}</span>
+    </button>
+
+    <div class={navMenuClass} onanimationend={handleAnimationEnd} style={zIndex}>
+      <button 
+        data-locator="close"
+        class="evo-message-center__close"
+        type="button"
+        aria-label="Close menu"
+        aria-controls="evoNavList"
+        aria-expanded={_bExpanded}
+        onclick={handleButtonClick}>
+        <span class="evo-message-center__bars"></span>
+        <span class="evo-message-center__bars"></span>
+      </button>
+
+      <!-- https://www.w3.org/WAI/tutorials/page-structure/headings/#main-heading-after-navigation -->
+      <h2 class="evo-message-center__heading evo-heading-xl">Menu</h2>
+
+      <ul id="evoNavList" class="evo-message-center__list" style={zIndex}>
+        <template for:each={msgCenterData.items} for:item="item" for:index="index">
+          <li key={item.key} class="evo-message-center__listitem">
+            <!-- Link -->
+            <a
+              class="evo-message-center__menuitem"
+              href={item.href}
+              target={item.target}
+              aria-label={item.label}
+              data-link-key={item.key}
+              onclick={handleLinkClick}
+              onkeydown={handleMenuitemKeydown}>
+              <span class="evo-message-center__menuitem-text" aria-hidden="true">{item.text}</span>
+              <span lwc:if={item.bNewWindow} class="evo-message-center__iconopenwindow evo-icon-open-in-new" aria-hidden="true"></span>
+              <span lwc:if={item.new} class="evo-message-center__new evo-message-center__new_item" aria-hidden="true">{item.newStr}</span>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </nav>
+</template>

@@ -1,0 +1,26 @@
+<template>
+  <c-header msg-center-data={_msgCenterData}></c-header>
+  <main class="via-nds">
+    <div class="evo-bg-white" style="border-bottom: 1px solid #DEDDDE">
+      <div class="container">
+        <c-evo-navigation nav-data={_navData} onproductsummary={handleEvent}></c-evo-navigation>
+      </div>
+    </div>
+    
+    <!-- DELETE - To test focus outside navigation-->
+    <div class="container nds-p-top_medium">
+      <a href="https://www.prudential.com" target="_blank">Prudential.com</a>
+      <br>
+      <a href="https://www.salesforce.com" target="_blank">Salesforce.com</a>
+    </div>
+
+    <div class="container evo-bg-white nds-p-around_x-small nds-m-top_large">
+      <c-evo-message-list data={_msgListDataData}></c-evo-message-list>
+    </div>
+
+    <!-- <c-svg-example></c-svg-example> -->
+    <div class="container evo-bg-white nds-p-around_x-small nds-m-top_large">
+      <c-datatable clientdata={_clientData} columns={_columnsDetails}></c-datatable>
+    </div>
+  </main>
+</template>

@@ -1,0 +1,47 @@
+<template>
+  <div class="evo-datatable">
+
+  </div>
+  <h2 class="evo-heading-lg evo-font-weight-light">Datatable2 Label</h2>
+
+  <!-- Desktop/Tablet view -->
+  <table aria-label="TODO - Label most be provided" class="evo-datatable_table evo-hide_small">
+    <thead>
+      <tr>
+        <template for:each={_columnsDetails} for:item="columnDetail">
+          <th scope="col" key={columnDetail.key}>{columnDetail.label}</th>
+        </template>
+      </tr>
+    </thead>
+    <tbody>
+      <template for:each={_recordsToDisplay} for:item="record">
+        <tr key={record.key}>
+          <template iterator:it={record.value}>
+            <td key={it.value.key}>
+              {it.value.value}
+            </td>
+            <!-- <th if:true={it.first} key={it.value.key}>
+              {it.value.value}
+            </th>
+            <td if:false={it.first} key={it.value.key}>
+              {it.value.value}
+            </td> -->
+          </template>
+        </tr>
+      </template>
+    </tbody>
+  </table>
+
+  <!-- Mobile view -->
+  <div class="evo-hide_medium evo-hide_desktop">
+    <template for:each={_recordsToDisplay} for:item="record">
+      <div key={record.key} class="evo-datatable_mob-box">
+        <template for:each={record.value} for:item="cell">
+          <div key={cell.key} class="evo-datatable_mob-row">
+            <strong class="evo-datatable_mob-label">{cell.label}</strong><span class="evo-datatable_mob-value">{cell.value}</span>
+          </div>
+        </template>
+      </div>
+    </template>
+  </div>
+</template>

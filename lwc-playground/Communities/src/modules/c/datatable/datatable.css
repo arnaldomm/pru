@@ -1,0 +1,44 @@
+/* Desktop Styles */
+.evo-datatable_table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.evo-datatable_table tr {
+  border-bottom: 1px solid var(--evo-text-lighter);
+}
+
+.evo-datatable_table tr:nth-child(even) {
+  background-color: var(--evo-gray-100);
+}
+
+.evo-datatable_table th,
+.evo-datatable_table td {
+  padding: 16px;
+}
+
+
+/* Mobile styles */
+.evo-datatable_mob-box {
+  margin: 20px auto;
+  border: 1px solid var(--evo-gray-600);
+  border-radius: 5px;
+  padding: 9px 18px 4px;
+}
+
+.evo-datatable_mob-row {
+  margin: 15px auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.evo-datatable_mob-row:last-of-type {
+  flex-direction: column;
+}
+
+
+.evo-datatable_mob-value {
+  max-width: 50%;
+  text-align: right;
+}

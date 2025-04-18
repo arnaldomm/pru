@@ -1,0 +1,120 @@
+<template>
+  <nav lwc:if={navData} class="evo-nav" style={zIndex} aria-label={navData.label} data-renderer={navData.renderer} onfocusout={handleFocusOut}>
+
+    <div class="evo-nav__info">
+      <strong class="evo-nav__currentpage" tabindex="-1">{_currentPage}</strong>
+      <!-- This is a fake hamburger button for visualization purposes only -->
+      <div class="evo-nav__hamburger evo-nav__hamburger_fake">
+        <span class="evo-nav__bars"></span>
+        <span class="evo-nav__bars"></span>
+        <span class="evo-nav__bars"></span>
+      </div>
+    </div>
+
+    <div class={navMenuClass} onanimationend={handleAnimationEnd} onkeydown={handleKeydown}>
+      <button 
+        data-locator="hamburger-button"
+        class="evo-nav__hamburger"
+        type="button"
+        aria-label={_hamburgerButtonLabel}
+        aria-controls="evoNavList"
+        aria-expanded={_bExpanded}
+        onclick={handleHamburgerClick}>
+        <span class="evo-nav__bars"></span>
+        <span class="evo-nav__bars"></span>
+        <span class="evo-nav__bars"></span>
+      </button>
+
+      <!-- https://www.w3.org/WAI/tutorials/page-structure/headings/#main-heading-after-navigation -->
+      <h2 class="evo-nav__heading evo-heading-xl">Menu</h2>
+
+      <ul id="evoNavList" class="evo-nav__list">
+        <template for:each={navData.items} for:item="item" for:index="index">
+          <li key={item.key} class="evo-nav__listitem">
+
+            <!-- Submenu -->
+            <div lwc:if={item.submenu}
+              onfocusout={handleSubmenuFocusOut}
+              tabindex="-1"
+              data-submenu-key={item.key}>
+
+              <button class="evo-nav__menuitem evo-nav__menutitem_expandable"
+                aria-label={item.label}
+                aria-expanded={item.expanded}
+                aria-controls={item.id}
+                data-submenu-key={item.key}
+                onclick={handleExpandableClick}
+                onkeydown={handleMenuitemKeydown}>
+                <span class="evo-nav__menuitem-text" aria-hidden="true">{item.text}</span>
+                <span class="evo-nav__iconcaret" aria-hidden="true">
+                  <svg viewBox="0 0 18 11" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                    <polygon fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round" points="2,2 16,2 9,9"/>
+                  </svg>
+                </span>
+              </button>
+              <ul class="evo-nav__sublist" id={item.id} tabindex="-1">
+                <template for:each={item.submenu} for:item="subitem">
+                  <li key={subitem.key} class="evo-nav__listitem evo-nav__listitem_expandable">
+
+                    <!-- Current Submenu -->
+                    <span lwc:if={subitem.current} 
+                      class="evo-nav__submenuitem evo-nav__submenuitem_current"
+                      data-key={subitem.key}
+                      data-submenu-key={item.key}
+                      data-locator="current"
+                      tabindex="-1"
+                      onkeydown={handleSubenuitemKeydown}>
+
+                      <span lwc:if={subitem.label} class="sr-only">Current page: {subitem.label}</span>
+                      <span lwc:else class="sr-only">Current page: {subitem.text}</span>
+                      <span aria-hidden="true">{subitem.text}</span>
+                    </span>
+
+                    <!-- Submenu link -->
+                    <a lwc:else
+                      class="evo-nav__submenuitem"
+                      href={subitem.href}
+                      target={subitem.target}
+                      aria-label={subitem.label}
+                      data-link-key={subitem.key}
+                      data-submenu-key={item.key}
+                      onclick={handleLinkClick}
+                      onkeydown={handleSubenuitemKeydown}>
+                      <span class="evo-nav__submenuitem-text" aria-hidden="true">{subitem.text}</span>
+                      <span lwc:if={subitem.bNewWindow} class="evo-nav__iconopenwindow evo-icon-open-in-new" aria-hidden="true"></span>
+                    </a>
+                  </li>
+                </template>
+              </ul>
+            </div>
+
+            <!-- Current page -->
+            <span lwc:elseif={item.current}
+              class="evo-nav__menuitem evo-nav__menuitem_current"
+              data-key={item.key} data-locator="current"
+              tabindex="-1"
+              onkeydown={handleMenuitemKeydown}>
+
+              <span lwc:if={item.label} class="sr-only">Current page: {item.label}</span>
+              <span lwc:else class="sr-only">Current page: {item.text}</span>
+              <span aria-hidden="true">{item.text}</span>
+            </span>
+
+            <!-- Link -->
+            <a lwc:else
+              class="evo-nav__menuitem"
+              href={item.href}
+              target={item.target}
+              aria-label={item.label}
+              data-link-key={item.key}
+              onclick={handleLinkClick}
+              onkeydown={handleMenuitemKeydown}>
+              <span class="evo-nav__menuitem-text" aria-hidden="true">{item.text}</span>
+              <span lwc:if={item.bNewWindow} class="evo-nav__iconopenwindow evo-icon-open-in-new" aria-hidden="true"></span>
+            </a>
+          </li>
+        </template>
+      </ul>
+    </div>
+  </nav>
+</template>
